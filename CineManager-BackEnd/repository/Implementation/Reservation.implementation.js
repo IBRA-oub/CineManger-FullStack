@@ -14,12 +14,18 @@ class ReservationRepository extends ReservationInterface {
     createReservation = async (userId, seanceId, places_reservees) => {
         return UserModel.User.findById(userId)
             .then(user => {
-                if (!user) throw new Error('User not found');
+                if (!user){
+
+                    throw new Error('User not found');
+                }
+                    
 
                 return SeanceModel.Seance.findById(seanceId)
                     .then(seance => {
-                        if (!seance) throw new Error('Séance introuvable.');
+                        if (!seance){
+                            throw new Error('Séance introuvable.');
 
+                        } 
                         let toutesPlacesDisponibles = true;
                         places_reservees.forEach((place) => {
                             const placeInSeance = seance.places.find(p => p.numero === place.numero);

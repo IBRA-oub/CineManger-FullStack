@@ -28,6 +28,10 @@ class FilmModel {
                 type: String,
                 required: true,
             },
+            video: {
+                type: String,
+                required: true,
+            },
             createdAt: {
                 type: Date,
                 default: Date.now

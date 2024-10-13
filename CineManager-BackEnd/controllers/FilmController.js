@@ -22,14 +22,15 @@ class FilmController {
 
     createFilm = async (req, res) => {
         upload(req, res, async (err) => {
+            if (err) {
+                return res.status(500).json({ message: 'Error uploading files: ' + err.message });
+            }
+
             const filmData = req.body;
-            const file = req.file;
-            console.log(filmData);
-
-
-
+            const file = req.files;
+    
             if (!file) {
-                return res.status(400).json({ message: 'Image is required' });
+                return res.status(400).json({ message: 'Image or video is required' });
             }
 
             if (!filmData.titre || !filmData.description || !filmData.genre || !filmData.duree || !filmData.annee) {
@@ -83,13 +84,13 @@ class FilmController {
                 throw new Error("All fields are required")
             }
 
-            return this.FilmService.updateFilm(id,filmData)
+            return this.FilmService.updateFilm(id, filmData)
                 .then((updatedFilm) => {
 
                     res.status(200).json({ message: "Film updated successfully", updatedFilm });
                 }
                 ).catch((err) => {
-                    
+
                     return res.status(500).json({ message: err.message });
                 })
 

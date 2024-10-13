@@ -1,9 +1,10 @@
 import FilmInterface from '../Interface/Film.interface.js';
 import FilmModel from "../../models/Film.mjs";
-import asyncHandler from "express-async-handler";
-import path from 'path';
-import upload from '../../middleware/configMulter.js';
-import { log } from 'console';
+// import asyncHandler from "express-async-handler";
+// import path from 'path';
+// import upload from '../../middleware/configMulter.js';
+// import { log } from 'console';
+import minio from '../../minio.js';
 
 
 class FilmRepository extends FilmInterface {
@@ -25,10 +26,15 @@ class FilmRepository extends FilmInterface {
 
     createFilm = async (filmData, file) => {
 
-        const image = file ? file.filename : null;
+        // const image = file.image ? file.image[0].filename : null;
+        // const video = file.video ? file.video[0].filename : null;
+        
+        const image = await this.uploadMoviePoster(file.image[0], 'images');
+        const video = await this.uploadMoviePoster(file.video[0], 'videos');
         FilmModel.Film.create({
             ...filmData,
             image: image,
+            video: video
         })
             .then(film => {
 
@@ -59,7 +65,7 @@ class FilmRepository extends FilmInterface {
 
 
 
-    updateFilm = async (id,filmData) => {
+    updateFilm = async (id, filmData) => {
         console.log(id);
         return FilmModel.Film.findById(id)
             .then(() => {
@@ -96,6 +102,20 @@ class FilmRepository extends FilmInterface {
                 throw err;
             });
 
+    }
+
+    async uploadMoviePoster(file, folder) {
+        const bucketName = 'cinemanager';
+        const fileName = `${folder}/${file.originalname}`;
+
+        const exists = await minio.bucketExists(bucketName);
+        if (!exists) {
+            await minio.makeBucket(bucketName, 'us-east-1');
+        }
+
+
+        await minio.fPutObject(bucketName, fileName, file.path);
+        return `http://127.0.0.1:9000/${bucketName}/${fileName}`;
     }
 }
 

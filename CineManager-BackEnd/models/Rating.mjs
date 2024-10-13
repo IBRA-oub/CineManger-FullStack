@@ -3,23 +3,13 @@ import mongoose from "mongoose";
 class RatingModel {
     constructor() {
         const ratingSchema = new mongoose.Schema({
-          rate : {
-            type : Number,
-            required : true
-          },
-            places: [{
-                numero: {
-                    type: Number,
-                    required: [true, "Please specify the seat number"]
-                },
-                disponible: {
-                    type: Boolean,
-                    default: true  // Par défaut, la place est disponible
-                }
-            }],
+            rate: {
+                type: Number,
+                required: true
+            },
             film: {
                 _id: {
-                    type:String,
+                    type: String,
                     required: true
                 },
                 titre: {
@@ -37,29 +27,33 @@ class RatingModel {
                 annee: {
                     type: Date,
                     required: [true, "Please add the year of production"]
-                }, image: {
+                },
+                image: {
                     type: String,
                     required: true,
                 },
+                video: {
+                    type: String,
+                    required: true,
+                }
             },
-            salle: {
+            user: {
                 nom: {
                     type: String,
                     required: [true, "Please add the room name"]
                 },
-                type: {
+                email: {
                     type: String,
                     required: [true, "Please specify the room type"]
-                },
-                places_totales: {
-                    type: Number,
-                    required: [true, "Please specify the total number of seats"]
                 }
             }
-        });
+        },
+            {
+                timestamps: true,
+            });
 
-        this.Seance = mongoose.model("Seance", seancesSchema);
+        this.Rating = mongoose.model("Rating", ratingSchema);
     }
 }
 
-export default new SeanceModel();
+export default new RatingModel();
