@@ -11,7 +11,7 @@ export default function SessionSection() {
         const fetchSession = async () => {
             try {
                 const sessionData = await getAllSession();
-                // console.log(sessionData)
+                console.log(sessionData)
                 setSessions(sessionData);
             } catch (error) {
                 console.error('Failed to fetch session:', error);

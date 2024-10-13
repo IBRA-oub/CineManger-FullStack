@@ -7,14 +7,14 @@ class SeanceInterface{
 
     }
 
-    async getAllSeance(baseUrl){
+    async getAllSeance(){
         throw new Error('Must be Implemented!!');
     }
     
     async createSeance({ date_heure, tarif, location, filmId, salleId }){
         throw new Error('Must be Implemented!!');
     }
-    async getSeance(id, baseUrl){
+    async getSeance(id){
         throw new Error('Must be Implemented!!');
     }
     async updateSeance(id, updateData){
@@ -23,7 +23,7 @@ class SeanceInterface{
     async deleteSeance(id){
         throw new Error('Must be Implemented!!');
     }
-    async getSeancesByFilm(id, baseUrl){
+    async getSeancesByFilm(id){
         throw new Error('Must be Implemented!!');
     }
    

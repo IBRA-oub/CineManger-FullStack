@@ -11,7 +11,7 @@ export default function FilmSection() {
         const fetchMovies = async () => {
             try {
                 const filmData = await getAllFilms();
-                // console.log(filmData)
+                console.log(filmData)
                 setMovies(filmData);
             } catch (error) {
                 console.error('Failed to fetch movies:', error);

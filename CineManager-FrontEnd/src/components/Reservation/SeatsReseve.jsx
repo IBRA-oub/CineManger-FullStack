@@ -65,7 +65,7 @@ export default function SeatsReseve({ id }) {
             }
         } catch (error) {
             console.error('Erreur lors de la réservation:', error);
-            alert('Une erreur est survenue lors de la réservation.');
+            
         }
     };
 
@@ -138,24 +138,24 @@ export default function SeatsReseve({ id }) {
             )}
             {sucessReservation && (
                 <div className="fixed top-0 left-0 w-full h-full bg-[#000000b0]  flex justify-center items-center z-50">
-                    <div class="w-full md:w-1/3 mx-auto">
-                        <div class="flex flex-col p-5 rounded-lg shadow bg-white">
-                            <div class="flex flex-col items-center text-center">
-                                <div class="inline-block p-4 bg-yellow-50 rounded-full">
+                    <div className="w-full md:w-1/3 mx-auto">
+                        <div className="flex flex-col p-5 rounded-lg shadow bg-white">
+                            <div className="flex flex-col items-center text-center">
+                                <div className="inline-block p-4 bg-yellow-50 rounded-full">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="34" width="34" viewBox="0 0 512 512"><path fill="#04ff00" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM164.1 325.5C182 346.2 212.6 368 256 368s74-21.8 91.9-42.5c5.8-6.7 15.9-7.4 22.6-1.6s7.4 15.9 1.6 22.6C349.8 372.1 311.1 400 256 400s-93.8-27.9-116.1-53.5c-5.8-6.7-5.1-16.8 1.6-22.6s16.8-5.1 22.6 1.6zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm156.4 25.6c-5.3 7.1-15.3 8.5-22.4 3.2s-8.5-15.3-3.2-22.4c30.4-40.5 91.2-40.5 121.6 0c5.3 7.1 3.9 17.1-3.2 22.4s-17.1 3.9-22.4-3.2c-17.6-23.5-52.8-23.5-70.4 0z" /></svg>
                                 </div>
-                                <h2 class="mt-2 font-semibold text-gray-800">Reservation Successful!</h2>
-                                <p class="mt-2 text-sm text-gray-600 leading-relaxed">Your reservation has been made successfully. You can now view your reservation details.
+                                <h2 className="mt-2 font-semibold text-gray-800">Reservation Successful!</h2>
+                                <p className="mt-2 text-sm text-gray-600 leading-relaxed">Your reservation has been made successfully. You can now view your reservation details.
 
                                     Please click the button below to see your reservation.</p>
                             </div>
 
-                            <div class="flex items-center mt-3">
-                                <button class="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md">
+                            <div className="flex items-center mt-3">
+                                <button className="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md">
 
                                 </button>
 
-                                <Link to="/client-reservation" class="flex-1 text-center px-4 py-2 ml-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-md">
+                                <Link to="/client-reservation" className="flex-1 text-center px-4 py-2 ml-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium rounded-md">
                                     view reservation
                                 </Link>
                             </div>

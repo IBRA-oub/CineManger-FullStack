@@ -6,18 +6,11 @@ import asyncHandler from "express-async-handler";
 
 class SeanceRepository extends SeanceInterface {
 
-    getAllSeance = async(baseUrl) => {
+    getAllSeance = async() => {
         return SeanceModel.Seance.find()
             .then(seances => {
                 
-                const fixImageSeances = seances.map(seance => ({
-                    ...seance._doc,
-                    film: {
-                        ...seance.film,
-                        image: `${baseUrl}${encodeURIComponent(seance.film.image)}`
-                    }
-                }));
-                return fixImageSeances;
+                return seances;
             });
     };
 
@@ -25,7 +18,8 @@ class SeanceRepository extends SeanceInterface {
         return SalleModel.Salle.findById(salleId)
             .then(salle => {
                 if (!salle) throw new Error("Salle non trouvée");
-                return FilmModel.Film.findById(filmId).then(film => {
+                return FilmModel.Film.findById(filmId)
+                .then(film => {
                     if (!film) throw new Error("Film non trouvé");
 
                     const places = Array.from({ length: salle.places }, (_, i) => ({
@@ -44,6 +38,7 @@ class SeanceRepository extends SeanceInterface {
                             duree: film.duree,
                             annee: film.annee,
                             image: film.image,
+                            video: film.video,
                         },
                         salle: {
                             nom: salle.nom,
@@ -56,19 +51,11 @@ class SeanceRepository extends SeanceInterface {
             });
     };
 
-    getSeance = async(id, baseUrl) => {
+    getSeance = async(id) => {
         return SeanceModel.Seance.findById(id)
             .then(seance => {
-                if (!seance) throw new Error("Seance not found");
-
-               
-                return {
-                    ...seance._doc,
-                    film: {
-                        ...seance.film,
-                        image: `${baseUrl}${encodeURIComponent(seance.film.image)}`,
-                    },
-                };
+                if (!seance) throw new Error("Seance not found"); 
+                return seance
             });
     };
 
@@ -88,6 +75,7 @@ class SeanceRepository extends SeanceInterface {
                                 duree: film.duree,
                                 annee: film.annee,
                                 image: film.image,
+                                video: film.video,
                             };
                         });
                 }
@@ -120,17 +108,11 @@ class SeanceRepository extends SeanceInterface {
             });
     };
 
-    getSeancesByFilm = async(filmId, baseUrl) => {
+    getSeancesByFilm = async(filmId) => {
         return SeanceModel.Seance.find({ 'film._id': filmId })
             .then(seances => {
                
-                return seances.map(seance => ({
-                    ...seance._doc,
-                    film: {
-                        ...seance.film,
-                        image: `${baseUrl}${encodeURIComponent(seance.film.image)}`,
-                    },
-                }));
+                return seances
             });
     };
 

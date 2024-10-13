@@ -9,14 +9,10 @@ import minio from '../../minio.js';
 
 class FilmRepository extends FilmInterface {
 
-    getAllFilm = async (baseURL) => {
+    getAllFilm = async () => {
         return FilmModel.Film.find()
             .then(films => {
-                const fixImageFilm = films.map(film => ({
-                    ...film._doc,
-                    image: `${baseURL}${encodeURIComponent(film.image)}`
-                }));
-                return fixImageFilm;
+                return films;
             })
             .catch(err => {
                 throw err;
@@ -26,9 +22,6 @@ class FilmRepository extends FilmInterface {
 
     createFilm = async (filmData, file) => {
 
-        // const image = file.image ? file.image[0].filename : null;
-        // const video = file.video ? file.video[0].filename : null;
-        
         const image = await this.uploadMoviePoster(file.image[0], 'images');
         const video = await this.uploadMoviePoster(file.video[0], 'videos');
         FilmModel.Film.create({
@@ -47,16 +40,11 @@ class FilmRepository extends FilmInterface {
 
     }
 
-    getFilm = async (baseURL, id) => {
+    getFilm = async (id) => {
         return FilmModel.Film.findById(id)
             .then(film => {
 
-                const fixImageFilm = {
-                    ...film._doc,
-                    image: `${baseURL}${encodeURIComponent(film.image)}`
-                };
-
-                return fixImageFilm;
+                return film;
             })
             .catch(err => {
                 throw err;
@@ -65,8 +53,14 @@ class FilmRepository extends FilmInterface {
 
 
 
-    updateFilm = async (id, filmData) => {
-        console.log(id);
+    updateFilm = async (id, filmData, file) => {
+        
+        const image = await this.uploadMoviePoster(file.image[0], 'images');
+        const video = await this.uploadMoviePoster(file.video[0], 'videos');
+        filmData.image = image;
+        filmData.video = video;
+       
+        
         return FilmModel.Film.findById(id)
             .then(() => {
                 return FilmModel.Film.findByIdAndUpdate(

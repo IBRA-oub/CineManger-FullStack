@@ -4,17 +4,17 @@ class FilmService {
         this.FilmRepository = new FilmRepository()
     }
 
-    async getAllFilm(baseURL) {
-        return this.FilmRepository.getAllFilm(baseURL)
+    async getAllFilm() {
+        return this.FilmRepository.getAllFilm()
     }
     async createFilm(filmData,file) {
         return this.FilmRepository.createFilm(filmData,file)
     }
-    async getFilm(baseURL, id) {
-        return this.FilmRepository.getFilm(baseURL, id)
+    async getFilm( id) {
+        return this.FilmRepository.getFilm( id)
     }
-    async updateFilm(id,filmData) {
-        return this.FilmRepository.updateFilm(id,filmData)
+    async updateFilm(id, filmData,file) {
+        return this.FilmRepository.updateFilm(id, filmData,file)
     }
     async deleteFilm(id) {
         return this.FilmRepository.deleteFilm(req, res)

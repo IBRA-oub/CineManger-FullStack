@@ -48,6 +48,9 @@ class SeanceModel {
                 }, image: {
                     type: String,
                     required: true,
+                }, video: {
+                    type: String,
+                    required: true,
                 },
             },
             salle: {

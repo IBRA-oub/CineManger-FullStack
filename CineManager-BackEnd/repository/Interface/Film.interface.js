@@ -7,17 +7,17 @@ class FilmInterface{
 
     }
 
-    async getAllFilm(baseURL){
+    async getAllFilm(){
         throw new Error('Must be Implemented!!');
     }
     
     async createFilm(filmData,file){
         throw new Error('Must be Implemented!!');
     }
-    async getFilm(baseURL, id){
+    async getFilm(id){
         throw new Error('Must be Implemented!!');
     }
-    async updateFilm(id,filmData){
+    async updateFilm(id, filmData,file){
         throw new Error('Must be Implemented!!');
     }
     async deleteFilm(id){

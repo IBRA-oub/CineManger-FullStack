@@ -7,13 +7,12 @@ class FilmController {
     }
 
     getAllFilm = async (req, res) => {
-        const baseURL = `${req.protocol}://${req.get('host')}/uploads/`;
-        return this.FilmService.getAllFilm(baseURL)
+       
+        return this.FilmService.getAllFilm()
             .then(films => {
 
                 return res.status(200).json(films);
             })
-
             .catch((err) => {
                 return res.status(500).json({ message: err.message });
             })
@@ -28,7 +27,8 @@ class FilmController {
 
             const filmData = req.body;
             const file = req.files;
-    
+            
+
             if (!file) {
                 return res.status(400).json({ message: 'Image or video is required' });
             }
@@ -39,7 +39,7 @@ class FilmController {
             }
             return this.FilmService.createFilm(filmData, file)
                 .then((film) => {
-                    console.log(film);
+                    
 
                     return res.status(200).json({ message: "movie created successfully", film: film });
                 })
@@ -51,9 +51,8 @@ class FilmController {
     };
     getFilm = async (req, res) => {
 
-        const baseURL = `${req.protocol}://${req.get('host')}/uploads/`;
         const id = req.params.id;
-        await this.FilmService.getFilm(baseURL, id)
+        await this.FilmService.getFilm(id)
             .then(film => {
 
                 return res.status(200).json(film);
@@ -69,22 +68,21 @@ class FilmController {
         upload(req, res, async (err) => {
             const id = req.params.id;
             const filmData = req.body;
-            const file = req.file;
+            const file = req.files;
+            
 
 
             if (!file) {
-                return res.status(400).json({ message: 'Image is required' });
+                return res.status(400).json({ message: 'Image or video is required' });
             }
-            if (file) {
-                filmData.image = file.filename;
-            }
+           
 
             if (!filmData.titre || !filmData.description || !filmData.genre || !filmData.duree || !filmData.annee) {
                 res.status(400);
                 throw new Error("All fields are required")
             }
 
-            return this.FilmService.updateFilm(id, filmData)
+            return this.FilmService.updateFilm(id, filmData,file)
                 .then((updatedFilm) => {
 
                     res.status(200).json({ message: "Film updated successfully", updatedFilm });

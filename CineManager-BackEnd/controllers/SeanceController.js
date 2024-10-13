@@ -20,8 +20,8 @@ class SeanceController {
 
     getSeance = async (req, res) => {
         const { id } = req.params;
-        const baseUrl = `${req.protocol}://${req.get('host')}/uploads/`;
-        this.SeanceService.getSeance(id, baseUrl)
+        // const baseUrl = `${req.protocol}://${req.get('host')}/uploads/`;
+        this.SeanceService.getSeance(id)
             .then(seance => res.status(200).json(seance))
             .catch(err => res.status(500).json({ message: err.message }));
     };
@@ -43,8 +43,8 @@ class SeanceController {
 
     getSeancesByFilm = async (req, res) => {
         const { id } = req.params;
-        const baseUrl = `${req.protocol}://${req.get('host')}/uploads/`;
-        this.SeanceService.getSeancesByFilm(id, baseUrl)
+
+        this.SeanceService.getSeancesByFilm(id)
             .then(seances => res.status(200).json(seances))
             .catch(err => res.status(500).json({ message: err.message }));
     };

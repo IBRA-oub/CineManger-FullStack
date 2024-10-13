@@ -4,14 +4,14 @@ class SeanceService {
         this.SeanceRepository = new SeanceRepository()
     }
 
-    async getAllSeance(baseUrl) {
-        return this.SeanceRepository.getAllSeance(baseUrl)
+    async getAllSeance() {
+        return this.SeanceRepository.getAllSeance()
     }
     async createSeance({ date_heure, tarif, location, filmId, salleId }) {
         return this.SeanceRepository.createSeance({ date_heure, tarif, location, filmId, salleId })
     }
-    async getSeance(id, baseUrl) {
-        return this.SeanceRepository.getSeance(id, baseUrl)
+    async getSeance(id) {
+        return this.SeanceRepository.getSeance(id)
     }
     async updateSeance(id, updateData) {
         return this.SeanceRepository.updateSeance(id, updateData)
@@ -19,8 +19,8 @@ class SeanceService {
     async deleteSeance(id) {
         return this.SeanceRepository.deleteSeance(id)
     }
-    async getSeancesByFilm(id, baseUrl) {
-        return this.SeanceRepository.getSeancesByFilm(id, baseUrl)
+    async getSeancesByFilm(id) {
+        return this.SeanceRepository.getSeancesByFilm(id)
     }
 }
 
