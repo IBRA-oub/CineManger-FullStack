@@ -8,7 +8,7 @@ import sendMail from "../../email.js";
 
 class UserRepository extends UserInterface {
 
-    create = async(nom, email, password) => {
+    create = async (nom, email, password) => {
         return UserModel.User.findOne({ email })
             .then(userAvailable => {
                 if (userAvailable) {
@@ -31,7 +31,7 @@ class UserRepository extends UserInterface {
             });
     };
 
-    loginUser = async(email, password) => {
+    loginUser = async (email, password) => {
         return UserModel.User.findOne({ email })
             .then(user => {
                 if (user && bcrypt.compare(password, user.password)) {
@@ -42,7 +42,7 @@ class UserRepository extends UserInterface {
                             role: user.role,
                             id: user.id
                         },
-                    }, process.env.ACCESSS_TOKEN_SECRET, { expiresIn: '1800s' });
+                    }, process.env.ACCESSS_TOKEN_SECRET, { expiresIn: '3h' });
                     return { accessToken };
                 } else {
                     throw new Error("Email or password is not valid");
@@ -54,7 +54,7 @@ class UserRepository extends UserInterface {
     };
 
 
-    requestPasswordReset = async(email) => {
+    requestPasswordReset = async (email) => {
         return UserModel.User.findOne({ email })
             .then((user) => {
                 if (!user) {
@@ -84,27 +84,27 @@ class UserRepository extends UserInterface {
             });
     };
 
-    resetPassword = async(token, password) => {
+    resetPassword = async (token, password) => {
         return UserModel.User.findOne({
             resetPasswordToken: token,
             resetPasswordExpires: { $gt: Date.now() }
         })
-        .then(user => {
-            if (!user) {
-                throw new Error('Password reset token is invalid or has expired.');
-            }
-            return bcrypt.hash(password, 10).then(hashedPassword => {
-                user.password = hashedPassword;
-                user.resetPasswordToken = undefined;
-                user.resetPasswordExpires = undefined;
-                return user.save().then(() => {
-                    return { message: 'Password has been reset successfully.' };
+            .then(user => {
+                if (!user) {
+                    throw new Error('Password reset token is invalid or has expired.');
+                }
+                return bcrypt.hash(password, 10).then(hashedPassword => {
+                    user.password = hashedPassword;
+                    user.resetPasswordToken = undefined;
+                    user.resetPasswordExpires = undefined;
+                    return user.save().then(() => {
+                        return { message: 'Password has been reset successfully.' };
+                    });
                 });
+            })
+            .catch(err => {
+                throw err;
             });
-        })
-        .catch(err => {
-            throw err;
-        });
     };
 
 

@@ -9,7 +9,7 @@ function PrivateRoute({ children }) {
     if (!isAuthenticated) {
       navigate('/login');
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated]);
 
   
   return isAuthenticated ? children : null;
