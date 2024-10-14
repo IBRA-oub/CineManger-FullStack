@@ -4,10 +4,10 @@ import axios from 'axios';
 import { getSeance } from '../../../services/sessionApi/getSessionApi';
 import { Link, useNavigate } from 'react-router-dom';
 
-export default function SeatsReseve({ id }) {
+export default function SeatsReseve({ id,selectedSeats, setSelectedSeats }) {
     const [seance, setSeance] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [selectedSeats, setSelectedSeats] = useState([]);
+    // const [selectedSeats, setSelectedSeats] = useState([]);
     const [showAlert, setShowAlert] = useState(false);
     const [sucessReservation, setSucessReservation] = useState(false);
     const navigate = useNavigate();
