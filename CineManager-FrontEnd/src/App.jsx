@@ -13,6 +13,7 @@ import ClientReservation from './pages/ClientReservation';
 import ClientTickets from './pages/ClientTickets';
 import Reservation from './pages/Reservation';
 import PrivateRoute from './routes/privateRoute';
+import FilmStream from './pages/FilmStream';
 
 function App() {
   return (
@@ -40,6 +41,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <ClientTickets />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path='/film-stream'  
+              element={
+                <PrivateRoute>
+                  <FilmStream />
                 </PrivateRoute>
               } 
             />

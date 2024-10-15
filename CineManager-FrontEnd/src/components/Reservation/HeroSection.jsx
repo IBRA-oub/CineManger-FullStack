@@ -87,10 +87,10 @@ export default function HeroSection({ id }) {
                             </div>
                             <div className='flex w-full justify-evenly'>
 
-                            <label onClick={CloseMdal} for="ratingModal" className="block text-center text-red-400 border border-red-400 rounded px-10 py-2 cursor-pointer hover:bg-red-400 hover:text-white transition duration-300">
+                            <label onClick={CloseMdal} htmlFor="ratingModal" className="block text-center text-red-400 border border-red-400 rounded px-10 py-2 cursor-pointer hover:bg-red-400 hover:text-white transition duration-300">
                                 Cancel
                             </label>
-                            <label for="ratingModal" className="block text-center text-blue-400 border border-blue-400 rounded px-10 py-2 cursor-pointer hover:bg-blue-400 hover:text-white transition duration-300">
+                            <label htmlFor="ratingModal" className="block text-center text-blue-400 border border-blue-400 rounded px-10 py-2 cursor-pointer hover:bg-blue-400 hover:text-white transition duration-300">
                                 Submit
                             </label>
                             </div>
