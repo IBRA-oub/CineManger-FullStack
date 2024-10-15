@@ -11,6 +11,7 @@ export default function HeroSection({ id }) {
     const [connecter, setConnecter] = useState(false);
     const [rateSuccess, setRateSuccess] = useState(false);
     const [rate, setRate] = useState('');
+    const [filmRate, setFilmRate] = useState('');
 
     useEffect(() => {
         const fetchSeance = async () => {
@@ -83,7 +84,7 @@ export default function HeroSection({ id }) {
                             <div className="flex items-center space-x-4">
                                 <div className="flex items-center">
                                     <span className="text-yellow-400 font-bold text-2xl">&#9733;</span>
-                                    <span className="text-lg ml-2">9,3 (3 M)</span>
+                                    <span className="text-lg ml-2">{filmRate}</span>
                                 </div>
                                 <button onClick={showMdal} className="text-blue-400 border border-blue-400 rounded px-4 py-1 hover:bg-blue-400 hover:text-white transition duration-300">
                                     Noter
