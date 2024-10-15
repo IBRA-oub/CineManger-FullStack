@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import heroImg from '../../assets/images/img2.jpg';
+import React, { useEffect, useRef, useState } from 'react';
 import logo from '../../assets/images/logo.png';
 import { getSeance } from '../../../services/sessionApi/getSessionApi';
 import { Link } from 'react-router-dom';
+import { ratingFilm } from '../../../services/filmApi/rateFilmApi';
 
 export default function HeroSection({ id }) {
     const [seance, setSeance] = useState([]);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const [modal, setModal] = useState(false);
+    const [connecter, setConnecter] = useState(false);
+    const [rateSuccess, setRateSuccess] = useState(false);
+    const [rate, setRate] = useState('');
 
     useEffect(() => {
-
-
         const fetchSeance = async () => {
             const data = await getSeance(id);
-            // console.log(data);
             setSeance(data);
             setLoading(true)
         };
@@ -23,13 +24,37 @@ export default function HeroSection({ id }) {
 
     }, [id]);
 
-    const showMdal = ()=>{
-        document.getElementById('modal').classList.remove('hidden')
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const token = localStorage.getItem('token');
+
+        if (token) {
+            const data = {
+                rate,
+                filmId: seance.film._id
+            };
+
+                await ratingFilm(data);
+                setRateSuccess(true);
+                setModal(false);
+
+        } else {
+            setConnecter(true);
+        }
+    };
+    const showMdal = () => {
+        setModal(true);
     }
-    const CloseMdal = ()=>{
-        document.getElementById('modal').classList.add('hidden')
+    const CloseMdal = () => {
+        setModal(false);
+        setConnecter(false)
     }
-    
+    const Close = () => {
+        setRateSuccess(false);
+    }
+
 
 
     return (
@@ -70,36 +95,63 @@ export default function HeroSection({ id }) {
 
                     </div>
 
-                    <div id='modal' className="fixed hidden  z-10 inset-0  flex items-center justify-center bg-black bg-opacity-90 transition-opacity duration-300">
+                    {modal && <div className="fixed  z-10 inset-0  flex items-center justify-center bg-black bg-opacity-90 transition-opacity duration-300">
                         <div className="bg-[#1a1a1aeb] p-6 rounded-lg w-96">
                             <div className="flex items-center justify-center mb-4">
                                 <span className="text-blue-400 text-5xl">&#9733;</span>
                             </div>
                             <h2 className="text-center text-xl font-bold mb-2">RATING THIS</h2>
                             <h3 className="text-center text-lg mb-4">Enter number between 1 and 5</h3>
-                            <div className="flex justify-center items-center mb-4">
-                               
-                                <span className="text-yellow-400 text-3xl">&#9733;</span>
-                                <form action="">
+                            <form onSubmit={handleSubmit}>
+                                <div className="flex justify-center items-center mb-4">
 
-                                <input className='h-7 w-10 pl-3 text-black font-bold rounded-md ml-3 bg-[#ffffffeb]' type="text"/>
-                                </form>
-                            </div>
+                                    <span className="text-yellow-400 text-3xl">&#9733;</span>
+
+                                    <input onChange={(e) => setRate(e.target.value)} className='h-7 w-10 pl-3 text-black font-bold rounded-md ml-3 bg-[#ffffffeb]' max={5} min={1} type="number" />
+
+                                </div>
+                                <div className='flex w-full justify-evenly'>
+
+                                    <label onClick={CloseMdal} htmlFor="ratingModal" className="block text-center text-red-400 border border-red-400 rounded px-10 py-2 cursor-pointer hover:bg-red-400 hover:text-white transition duration-300">
+                                        Cancel
+                                    </label>
+                                    <button type='submit'  htmlFor="ratingModal" className="block text-center text-blue-400 border border-blue-400 rounded px-10 py-2 cursor-pointer hover:bg-blue-400 hover:text-white transition duration-300">
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>}
+                    {connecter && <div className="fixed  z-10 inset-0  flex items-center justify-center bg-black bg-opacity-90 transition-opacity duration-300">
+                        <div className="bg-[#1a1a1aeb] p-6 rounded-lg w-96">
+
+                            <h2 className="text-center text-xl font-bold mb-2">You Should Be Connected First</h2>
+
                             <div className='flex w-full justify-evenly'>
 
-                            <label onClick={CloseMdal} htmlFor="ratingModal" className="block text-center text-red-400 border border-red-400 rounded px-10 py-2 cursor-pointer hover:bg-red-400 hover:text-white transition duration-300">
-                                Cancel
-                            </label>
-                            <label htmlFor="ratingModal" className="block text-center text-blue-400 border border-blue-400 rounded px-10 py-2 cursor-pointer hover:bg-blue-400 hover:text-white transition duration-300">
-                                Submit
-                            </label>
+                                <label onClick={CloseMdal} htmlFor="ratingModal" className="block text-center text-blue-400 border border-blue-400 rounded px-10 py-2 cursor-pointer hover:bg-blue-400 hover:text-white transition duration-300">
+                                    OK!
+                                </label>
                             </div>
                         </div>
-                    </div>
+                    </div>}
+                    {rateSuccess && <div className="fixed  z-10 inset-0  flex items-center justify-center bg-black bg-opacity-90 transition-opacity duration-300">
+                        <div className="bg-[#1a1a1aeb] p-6 rounded-lg w-96">
+
+                            <h2 className="text-center text-xl font-bold mb-2">Successfully rated film</h2>
+
+                            <div className='flex w-full justify-evenly'>
+
+                                <label onClick={Close} htmlFor="ratingModal" className="block text-center text-blue-400 border border-blue-400 rounded px-10 py-2 cursor-pointer hover:bg-blue-400 hover:text-white transition duration-300">
+                                    Close!
+                                </label>
+                            </div>
+                        </div>
+                    </div>}
                 </div>
 
 
-            </div>}
+            </div >}
 
         </>
     )

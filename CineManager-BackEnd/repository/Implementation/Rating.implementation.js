@@ -31,6 +31,7 @@ class RatingRepository extends RatingInterface {
     };
 
     createRating = async (userId, filmId, rate ) => {
+        console.log(rate,filmId);
             
         return UserModel.User.findById(userId)
             .then(user => {

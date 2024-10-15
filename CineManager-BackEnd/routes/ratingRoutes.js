@@ -5,7 +5,7 @@ import checkRole from "../middleware/checkRole.js";
 
 const router = express.Router();
 
-router.post('/rate/:id',validateToken,checkRole("client"),RatingController.createRating);
+router.post('/rate',validateToken,checkRole("client"),RatingController.createRating);
 router.get('/all-rate/:id',RatingController.getAllRating);
 router.get('/user-rate/:id',validateToken,checkRole("client"),RatingController.getRateByUser);
 

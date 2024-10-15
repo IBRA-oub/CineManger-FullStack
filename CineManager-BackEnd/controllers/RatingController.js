@@ -6,10 +6,8 @@ class RatingController {
     }
 
     createRating = (req, res) => {
-        const {rate}  = req.body;
-        const filmId = req.params.id;
-
-        // Extraire le token d'authentification et décoder l'userId
+        const {rate,filmId}  = req.body;
+        
         const token = req.headers['authorization']?.split(' ')[1];
         if (!token) {
             return res.status(401).json({ message: 'Token not provided' });
@@ -19,8 +17,9 @@ class RatingController {
         const userId = decoded.user.id;
         
         
+        
 
-        // Appel du service pour créer la réservation
+
         this.RatingService.createRating(userId, filmId, rate)
             .then((result) => {
                 res.status(201).json({message:"youe rate is sauvegard",result});
