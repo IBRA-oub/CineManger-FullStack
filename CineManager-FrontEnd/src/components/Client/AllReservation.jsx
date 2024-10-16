@@ -22,13 +22,13 @@ export default function AllReservation() {
     }, []);
     return (
         <>
-            <div className='w-full h-full bg-white'>
+            <div className='w-full h-screen bg-[#d9d9d9]'>
                 <p className="relative text-black text-xl font-semibold pl-9 md:pt-5">
                     All Reservation
                     <span className="absolute bottom-0 left-9 w-20 border-b-2 border-red-700"></span>
                 </p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full p-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 w-full p-6">
                     {reservation.map((reservation) => (
                         <div key={reservation._id} className="relative mx-auto w-full">
 

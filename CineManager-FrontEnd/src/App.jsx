@@ -14,6 +14,7 @@ import ClientTickets from './pages/ClientTickets';
 import Reservation from './pages/Reservation';
 import PrivateRoute from './routes/privateRoute';
 import FilmStream from './pages/FilmStream';
+import UserInfo from './pages/UserInfo';
 
 function App() {
   return (
@@ -41,6 +42,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <ClientTickets />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path='/my-account'  
+              element={
+                <PrivateRoute>
+                  <UserInfo/>
                 </PrivateRoute>
               } 
             />

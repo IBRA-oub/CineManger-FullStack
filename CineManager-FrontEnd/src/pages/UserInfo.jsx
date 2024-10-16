@@ -1,22 +1,19 @@
 import React from 'react'
 import Navbar from '../components/Client/navbar'
-import AllTickets from '../components/Client/AllTickets'
+import Account from '../components/Client/Account'
 
-
-
-export default function ClientTickets() {
+export default function UserInfo() {
   return (
     <>
-
-      <div className='md:flex'>
+         <div className='md:flex'>
         <div className='md:w-[15%] md:h-screen md:border '>
           <Navbar />
         </div>
         <div className='md:w-[85%] md:h-full'>
-          <AllTickets />
+          <Account/>
         </div>
       </div>
+    
     </>
-
   )
 }
