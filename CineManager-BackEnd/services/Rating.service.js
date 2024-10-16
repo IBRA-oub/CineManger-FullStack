@@ -13,12 +13,7 @@ class RatingService {
     async getRateByUser(userEmail,filmId) {
         return this.RatingRepository.getRateByUser(userEmail,filmId)
     }
-    // async updateRating(id, ratingData,file) {
-    //     return this.RatingRepository.updateRating(id, ratingData,file)
-    // }
-    // async deleteRating(id) {
-    //     return this.RatingRepository.deleteRating(req, res)
-    // }
+  
 }
 
 export default RatingService;

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import bgImg from '../assets/images/bgImg.png';
 import logo from '../assets/images/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,6 +10,8 @@ import { requestRestPAssword } from '../../services/authApi/requestResetPassword
 export default function ForgetPassword() {
 
     const { validateForm, resetForm, getError, hasError, isFormValided } = requestResetPasswordValidation();
+    const [success,setSuccess] = useState(false);
+    const [userNotExist,setUserNotExist] = useState(false)
     const emailField = useRef();
 
    
@@ -28,12 +30,14 @@ export default function ForgetPassword() {
 
         if (validateForm(fields)) {
             try {
-                const userData = await requestRestPAssword(fields);
-                document.getElementById("success").classList.remove("hidden");
+                 await requestRestPAssword(fields);
+                setSuccess(true);
+               
 
 
             } catch (error) {
-                document.getElementById("userNotExist").classList.remove("hidden");
+                setUserNotExist(true);
+                
             }
 
 
@@ -47,7 +51,7 @@ export default function ForgetPassword() {
     return (
         <>
             <div className=' w-full h-[150vh] md:h-[100vh] roun bg-cover bg-center flex justify-center  md:items-center  ' style={{ backgroundImage: `url(${bgImg})` }} >
-                <div id='success' className='hidden w-full h-screen bg-[#000000df] z-10 flex justify-center items-center'>
+               {success && <div className='w-full h-screen bg-[#000000df] z-10 flex justify-center items-center'>
                     <div class="w-full md:w-1/3 mx-auto">
                         <div class="flex flex-col p-5 rounded-lg shadow bg-white">
                             <div class="flex flex-col items-center text-center">
@@ -71,7 +75,7 @@ export default function ForgetPassword() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>} 
                 <div className='absolute top-52 w-96 h-96 bg-black '>
                     <Link to="/">
                         <div className='absolute w-10 h-10  bg-cover bg-center' style={{ backgroundImage: `url(${logo})` }} >
@@ -89,7 +93,7 @@ export default function ForgetPassword() {
                                     <label htmlFor="email" className="block text-white mb-2">Email</label>
                                     <input ref={emailField} type="text" id="email" name="email" className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" />
                                     {hasError("email") && <div className="text-red-400  font-bold">{getError("email")}</div>}
-                                    <div id='userNotExist' className=" hidden text-red-400 font-bold">email doasn't existe</div>
+                                   {userNotExist && <div  className="  text-red-400 font-bold">email doasn't existe</div>} 
                                 </div>
 
                                 <button type="submit" className="w-full py-2 bg-[#ff0707]  text-white font-bold rounded-md hover:bg-white hover:text-[#ff0707]  transition">Submit</button>

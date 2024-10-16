@@ -1,19 +1,16 @@
 import React from 'react'
-import streamVideo from '../../assets/images/streamVideo.mp4';
+// import streamVideo from '../../assets/images/streamVideo.mp4';
 
-export default function VideoSection() {
+export default function VideoSection({ film }) {
+ 
   return (
     <>
+
       <div className='w-full h-full '>
-
-      <video className='w-full h-full' controls>
-          <source src={streamVideo} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-
+        <video controls className='w-full h-full' src={film.video} type="video/mp4" />
       </div>
-   
-    
+
+
     </>
   )
 }

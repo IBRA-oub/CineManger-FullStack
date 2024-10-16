@@ -17,12 +17,7 @@ class RatingInterface{
     async getRateByUser(userEmail,filmId){
         throw new Error('Must be Implemented!!');
     }
-    // async updateRating(id, ratingData,file){
-    //     throw new Error('Must be Implemented!!');
-    // }
-    // async deleteRating(id){
-    //     throw new Error('Must be Implemented!!');
-    // }
+  
    
 
 }

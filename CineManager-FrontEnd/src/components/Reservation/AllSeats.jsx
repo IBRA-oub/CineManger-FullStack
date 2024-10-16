@@ -274,10 +274,6 @@ export default function AllSeats({ id, selectedSeats, setSelectedSeats }) {
                                     </div>
                                 ))}
 
-
-
-
-
                             </div>
 
                         </div>
@@ -285,7 +281,7 @@ export default function AllSeats({ id, selectedSeats, setSelectedSeats }) {
                     <div className='w-[20%]  h-full  flex justify-center '>
 
                         <div className='w-[70%] h-[50%]  flex flex-col text-white space-y-8 p-4 pt-6'>
-                            <Link to="/film-stream" className="text-white text-sm text-center font-semibold w-full bg-red-600  rounded px-4 py-2 transition duration-300 transform hover:bg-white hover:text-red-500 cursor-pointer animate-pulse">
+                            <Link to={`/film-stream/${seance.film._id}`} className="text-white text-sm text-center font-semibold w-full bg-red-600  rounded px-4 py-2 transition duration-300 transform hover:bg-white hover:text-red-500 cursor-pointer animate-pulse">
                                 View Stream
                             </Link>
                             <div className="flex flex-col items-center pt-10">

@@ -3,6 +3,7 @@ import logo from '../../assets/images/logo.png';
 import { getSeance } from '../../../services/sessionApi/getSessionApi';
 import { Link } from 'react-router-dom';
 import { ratingFilm } from '../../../services/filmApi/rateFilmApi';
+import { getAllRate } from '../../../services/filmApi/getAllRateApi';
 
 export default function HeroSection({ id }) {
     const [seance, setSeance] = useState([]);
@@ -13,6 +14,8 @@ export default function HeroSection({ id }) {
     const [rate, setRate] = useState('');
     const [filmRate, setFilmRate] = useState('');
 
+
+
     useEffect(() => {
         const fetchSeance = async () => {
             const data = await getSeance(id);
@@ -20,10 +23,23 @@ export default function HeroSection({ id }) {
             setLoading(true)
         };
 
-
         fetchSeance();
 
     }, [id]);
+
+    useEffect(() => {
+        const fetchFilmRate = async () => {
+            console.log(seance);
+            if (seance && seance.film && seance.film._id) {
+                const data = await getAllRate(seance.film._id);
+                setFilmRate(data);
+
+            }
+        };
+
+        fetchFilmRate()
+
+    }, [seance])
 
 
     const handleSubmit = async (e) => {
@@ -37,9 +53,9 @@ export default function HeroSection({ id }) {
                 filmId: seance.film._id
             };
 
-                await ratingFilm(data);
-                setRateSuccess(true);
-                setModal(false);
+            await ratingFilm(data);
+            setRateSuccess(true);
+            setModal(false);
 
         } else {
             setConnecter(true);
@@ -61,10 +77,12 @@ export default function HeroSection({ id }) {
     return (
         <>
             {loading && <div className="h-96 bg-[#121212] md:h-[400px] w-full bg-cover bg-center  relative overflow-hidden" style={{ backgroundImage: `url(${seance.film.image})` }}>
+
                 <div className='w-full h-full blur-lg bg-[#000000c0]'></div>
                 <Link to="/">
                     <div className='absolute top-0 left-3 w-10 h-10   bg-cover bg-center' style={{ backgroundImage: `url(${logo})` }} >
                     </div>
+
                 </Link>
                 <div className='h-72 md:h-96 w-72 md:w-full  absolute -bottom-24  md:left-96  left-24'>
                     <div className='w-[60%] h-32 md:h-52 md:pb-9 flex justify-end '>
@@ -84,7 +102,7 @@ export default function HeroSection({ id }) {
                             <div className="flex items-center space-x-4">
                                 <div className="flex items-center">
                                     <span className="text-yellow-400 font-bold text-2xl">&#9733;</span>
-                                    <span className="text-lg ml-2">{filmRate}</span>
+                                    <span className="text-lg ml-2">{filmRate.averageRate}</span>
                                 </div>
                                 <button onClick={showMdal} className="text-blue-400 border border-blue-400 rounded px-4 py-1 hover:bg-blue-400 hover:text-white transition duration-300">
                                     Noter
@@ -116,7 +134,7 @@ export default function HeroSection({ id }) {
                                     <label onClick={CloseMdal} htmlFor="ratingModal" className="block text-center text-red-400 border border-red-400 rounded px-10 py-2 cursor-pointer hover:bg-red-400 hover:text-white transition duration-300">
                                         Cancel
                                     </label>
-                                    <button type='submit'  htmlFor="ratingModal" className="block text-center text-blue-400 border border-blue-400 rounded px-10 py-2 cursor-pointer hover:bg-blue-400 hover:text-white transition duration-300">
+                                    <button type='submit' htmlFor="ratingModal" className="block text-center text-blue-400 border border-blue-400 rounded px-10 py-2 cursor-pointer hover:bg-blue-400 hover:text-white transition duration-300">
                                         Submit
                                     </button>
                                 </div>

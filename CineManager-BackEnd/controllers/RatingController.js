@@ -62,17 +62,6 @@ class RatingController {
             });
     };
 
-    // // Supprimer une réservation
-    // deleteReservation = (req, res) => {
-    //     const reservationId = req.params.id;
-
-    //     this.ReservationService.deleteReservation(reservationId)
-    //         .then((result) => {
-    //             res.status(200).json(result);
-    //         })
-    //         .catch((error) => {
-    //             res.status(500).json({ message: error.message });
-    //         });
-    // };
+   
 }
 export default new RatingController();
