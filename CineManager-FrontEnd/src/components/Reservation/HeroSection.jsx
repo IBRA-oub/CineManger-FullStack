@@ -4,6 +4,9 @@ import { getSeance } from '../../../services/sessionApi/getSessionApi';
 import { Link } from 'react-router-dom';
 import { ratingFilm } from '../../../services/filmApi/rateFilmApi';
 import { getAllRate } from '../../../services/filmApi/getAllRateApi';
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
+
 
 export default function HeroSection({ id }) {
     const [seance, setSeance] = useState([]);
@@ -11,7 +14,7 @@ export default function HeroSection({ id }) {
     const [modal, setModal] = useState(false);
     const [connecter, setConnecter] = useState(false);
     const [rateSuccess, setRateSuccess] = useState(false);
-    const [rate, setRate] = useState('');
+    const [rate, setRate] = useState(0);
     const [filmRate, setFilmRate] = useState('');
 
 
@@ -115,18 +118,25 @@ export default function HeroSection({ id }) {
                     </div>
 
                     {modal && <div className="fixed  z-10 inset-0  flex items-center justify-center bg-black bg-opacity-90 transition-opacity duration-300">
-                        <div className="bg-[#1a1a1aeb] p-6 rounded-lg w-96">
+                        <div className="bg-[#464646eb] p-6 rounded-lg w-96">
                             <div className="flex items-center justify-center mb-4">
-                                <span className="text-blue-400 text-5xl">&#9733;</span>
+                                <span className="text-yellow-400 text-5xl">&#9733;</span>
                             </div>
                             <h2 className="text-center text-xl font-bold mb-2">RATING THIS</h2>
-                            <h3 className="text-center text-lg mb-4">Enter number between 1 and 5</h3>
+                            <h3 className="text-center text-lg mb-4">I hope that you like movie</h3>
                             <form onSubmit={handleSubmit}>
                                 <div className="flex justify-center items-center mb-4">
 
-                                    <span className="text-yellow-400 text-3xl">&#9733;</span>
 
-                                    <input onChange={(e) => setRate(e.target.value)} className='h-7 w-10 pl-3 text-black font-bold rounded-md ml-3 bg-[#ffffffeb]' max={5} min={1} type="number" />
+                                    <Stack spacing={1}>
+                                        <Rating
+                                            name="half-rating"
+                                            value={rate}
+                                            precision={0.5}
+                                            size="large"
+                                            onChange={(event, newValue) => setRate(newValue)}
+                                        />
+                                    </Stack>
 
                                 </div>
                                 <div className='flex w-full justify-evenly'>
