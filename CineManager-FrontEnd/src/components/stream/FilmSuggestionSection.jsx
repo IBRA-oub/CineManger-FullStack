@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import heroImg from '../../assets/images/img2.jpg';
 import { getAllFilmWithSomeGenreApi } from '../../../services/filmApi/getAllFilmWithSomeGenreApi';
+import { Link } from 'react-router-dom';
 
 export default function FilmSuggestionSection({ film }) {
 
@@ -27,9 +28,9 @@ export default function FilmSuggestionSection({ film }) {
       </p>
       {filmSuggestion.map((film) => (
 
-        <div key={film._id} className='w-[100%] h-40  mx-auto p-3  flex '>
+        <Link key={film._id} to={`/all-session-film/${film._id}`} className='w-[100%] h-40  mx-auto p-3  flex  '>
 
-          <div className='w-[50%] h-[80%] bg-slate-100 rounded-md'>
+          <div className='w-[50%] h-[80%] bg-slate-100 rounded-md hover:w-[60%] hover:h-[90%] transition-all duration-300 ease-in-out'>
             <img src={film.image} alt="Film Suggestion" className="w-full h-full object-cover rounded-md" />
           </div>
           <div className=' w-[50%]  h-full text-white'>
@@ -44,7 +45,7 @@ export default function FilmSuggestionSection({ film }) {
             </p>
           </div>
 
-        </div>
+        </Link>
       ))}
 
 
