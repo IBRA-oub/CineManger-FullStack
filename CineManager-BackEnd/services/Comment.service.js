@@ -13,7 +13,7 @@ class CommentService {
     async getAllFilmWithSomeGenre(genre) {
         return this.CommentRepository.getAllFilmWithSomeGenre(genre)
     }
-  
+
 }
 
 export default CommentService;

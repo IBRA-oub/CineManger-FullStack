@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { commentFilm } from '../../../services/filmApi/commentFilm';
+import { formatDistanceToNow } from 'date-fns';
 
 export default function CommentSection({ filmComment,setFilmComment,film }) {
   
@@ -73,8 +74,8 @@ export default function CommentSection({ filmComment,setFilmComment,film }) {
 
                 <div className="flex justify-between items-center mb-3">
                   <div className="text-sm font-medium text-gray-400">
-                    <span>{comment.user?.nom}</span>
-                    <span className="ml-2 text-xs text-gray-500">il y a {comment.updatedAt} (modifié)</span>
+                    <span>{comment.user.nom}</span>
+                    <span className="ml-2 text-xs text-gray-500">il y a {formatDistanceToNow(new Date(comment.updatedAt), { addSuffix: true })} (modifié)</span>
                   </div>
                   <div className="text-sm text-gray-400">
 
@@ -85,7 +86,7 @@ export default function CommentSection({ filmComment,setFilmComment,film }) {
                 </div>
 
                 <p className="text-base">
-                  {comment.comment}  <span className="text-yellow-500">🙂</span>
+                  {comment.comment}  
                 </p>
               </div>
             </div>

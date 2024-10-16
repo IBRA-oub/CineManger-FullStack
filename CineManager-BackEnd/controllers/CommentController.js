@@ -6,7 +6,7 @@ class CommentController {
     }
 
     createComment = (req, res) => {
-        const { comment,filmId } = req.body;
+        const { comment, filmId } = req.body;
         // const filmId = req.params.id;
 
 
@@ -39,7 +39,7 @@ class CommentController {
             });
     };
     getAllFilmWithSomeGenre = (req, res) => {
-        const {genre} = req.body
+        const { genre } = req.params
         this.CommentService.getAllFilmWithSomeGenre(genre)
             .then((Allmovie) => {
                 res.status(200).json(Allmovie);
@@ -49,7 +49,7 @@ class CommentController {
             });
     };
 
-    
+
 
 
 

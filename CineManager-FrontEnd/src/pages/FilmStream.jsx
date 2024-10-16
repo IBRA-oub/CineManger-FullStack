@@ -43,7 +43,7 @@ export default function FilmStream() {
             <CommentSection filmComment={filmComment} setFilmComment={setFilmComment} film={film} />
           </div>
           <div className='w-[25%] h-full '>
-            <FilmSuggestionSection />
+            <FilmSuggestionSection film={film} />
           </div>
         </div>
 
