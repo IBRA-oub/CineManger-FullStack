@@ -38,6 +38,18 @@ class CommentController {
                 res.status(500).json({ message: error.message });
             });
     };
+    getAllFilmWithSomeGenre = (req, res) => {
+        const {genre} = req.body
+        this.CommentService.getAllFilmWithSomeGenre(genre)
+            .then((Allmovie) => {
+                res.status(200).json(Allmovie);
+            })
+            .catch((error) => {
+                res.status(500).json({ message: error.message });
+            });
+    };
+
+    
 
 
 

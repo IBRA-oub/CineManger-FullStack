@@ -10,6 +10,9 @@ class CommentService {
     async createComment(userId, filmId, comment) {
         return this.CommentRepository.createComment(userId, filmId, comment)
     }
+    async getAllFilmWithSomeGenre(genre) {
+        return this.CommentRepository.getAllFilmWithSomeGenre(genre)
+    }
   
 }
 

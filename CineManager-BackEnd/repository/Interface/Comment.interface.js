@@ -14,6 +14,10 @@ class CommentInterface{
     async createComment(userId, filmId, comment){
         throw new Error('Must be Implemented!!');
     }
+    async 
+    async getAllFilmWithSomeGenre(genre){
+        throw new Error('Must be Implemented!!');
+    }
    
   
    

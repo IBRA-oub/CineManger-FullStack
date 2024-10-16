@@ -44,6 +44,11 @@ class CommentRepository extends CommentInterface {
             });
 
     };
+
+    getAllFilmWithSomeGenre=async(genre)=>{
+        
+        return FilmModel.Film.find({"genre":genre})
+    }
 }
 
 export default CommentRepository;
