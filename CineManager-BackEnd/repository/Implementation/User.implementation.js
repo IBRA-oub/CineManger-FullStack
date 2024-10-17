@@ -58,7 +58,6 @@ class UserRepository extends UserInterface {
     }
 
     updateUser = async (userId, userData, file) => {
-        console.log(file);
         
         if (file && file.image) {
             

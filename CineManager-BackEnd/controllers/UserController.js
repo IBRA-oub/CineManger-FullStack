@@ -51,7 +51,6 @@ class UserController {
         upload(req, res, async (err) => {
             const userData = req.body;
             const file = req.files;
-            console.log(file);
 
 
             const token = req.headers['authorization']?.split(' ')[1];

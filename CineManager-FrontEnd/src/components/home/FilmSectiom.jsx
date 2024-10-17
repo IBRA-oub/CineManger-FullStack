@@ -4,15 +4,17 @@ import '../../style/home.css'
 import { getAllFilms } from '../../../services/filmApi/getAllFilmApi';
 import { Link } from 'react-router-dom';
 
-export default function FilmSection() {
+export default function FilmSection({ filters }) {
     const [movies, setMovies] = useState([]);
+    const [filteredMovies, setFilteredMovies] = useState([]);
 
     useEffect(() => {
         const fetchMovies = async () => {
             try {
                 const filmData = await getAllFilms();
-                console.log(filmData)
+               
                 setMovies(filmData);
+                setFilteredMovies(filmData); 
             } catch (error) {
                 console.error('Failed to fetch movies:', error);
             }
@@ -20,6 +22,19 @@ export default function FilmSection() {
 
         fetchMovies();
     }, []);
+
+    useEffect(() => {
+        if (filters) {
+            const { title, genre } = filters;
+            const filtered = movies.filter(movie =>
+                (title ? movie.titre.toLowerCase().includes(title.toLowerCase()) : true) &&
+                (genre ? movie.genre.toLowerCase() === genre.toLowerCase() : true)
+            );
+            setFilteredMovies(filtered);
+        } else {
+            setFilteredMovies(movies);  
+        }
+    }, [filters, movies]);
 
 
 
@@ -41,7 +56,7 @@ export default function FilmSection() {
                         <div
                             className="flex flex-nowrap   space-x-4 p-8"
                         >
-                            {movies.map((movie) => (
+                            {filteredMovies.map((movie) => (
                                 <div
                                     key={movie._id}
                                     className="relative w-64 h-96 shadow-md shadow-gray-600 hover:shadow-md hover:shadow-white bg-cover bg-center rounded-lg transition-all duration-300 ease-in-out transform  hover:w-72 hover:h-[400px]  "

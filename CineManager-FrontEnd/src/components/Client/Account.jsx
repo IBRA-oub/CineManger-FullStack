@@ -118,7 +118,7 @@ export default function Account({ user,handleUserUpdate }) {
                             <img
                                 src={user.image || "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"}
                                 alt="Profile Avatar"
-                                className="w-32 h-32 rounded-full mx-auto"
+                                className="w-36 h-36 rounded-full mx-auto"
                             />
                             <h3 className="text-xl font-bold mt-4">{user.nom}</h3>
 
@@ -147,7 +147,7 @@ export default function Account({ user,handleUserUpdate }) {
                         <div className="mt-6 ">
                             <p><span className="font-bold">Email:</span> {user.email}</p>
                             <p><span className="font-bold">Role : </span> Client</p>
-                            <p><span className="font-bold">89</span> Comments</p>
+                            <p><span className="font-bold"></span> </p>
                         </div>
                     </div>
                 </form>

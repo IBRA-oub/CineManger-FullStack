@@ -35,7 +35,8 @@ class CommentRepository extends CommentInterface {
                             },
                             user: {
                                 nom: user.nom,
-                                email: user.email
+                                email: user.email,
+                                image:user.image
                             }
 
                         });

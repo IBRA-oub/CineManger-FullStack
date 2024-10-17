@@ -23,7 +23,7 @@ export default function CommentSection({ filmComment,setFilmComment,film }) {
   return (
     <>
 
-      <div className=" text-white">
+      <div  className=" text-white">
         <div className="w-[95%] mt-10 p-4">
           <div className="flex items-start space-x-4">
 
@@ -67,7 +67,7 @@ export default function CommentSection({ filmComment,setFilmComment,film }) {
           <div className=" w-[90%]  mx-10  mt-10 text-white">
             <div className="border bg-[#252525] border-gray-700 rounded-lg p-4 flex items-start space-x-4">
 
-              <img className="w-12 h-12 rounded-full" src="https://via.placeholder.com/150" alt="User avatar" />
+              <img className="w-12 h-12 rounded-full" src={comment.user.image} alt="User avatar" />
 
 
               <div className="flex-1">

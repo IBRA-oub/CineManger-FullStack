@@ -40,11 +40,15 @@ class CommentModel {
             user: {
                 nom: {
                     type: String,
-                    required: [true, "Please add the room name"]
+                    required: [true, "Please add the  name"]
                 },
                 email: {
                     type: String,
-                    required: [true, "Please specify the room type"]
+                    required: [true, "Please specify the email"]
+                },
+                image: {
+                    type: String,
+                    required: [true, "Please specify the image"]
                 }
             }
         },

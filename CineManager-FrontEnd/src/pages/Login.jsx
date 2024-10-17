@@ -28,7 +28,7 @@ export default function Login() {
         if (validateForm(fields)) {
             try{
                 await loginUserApi(fields);
-                navigate('/client-reservation')
+                navigate('/my-account')
                 
 
             }catch(error){
