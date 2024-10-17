@@ -6,7 +6,7 @@ import CommentInterface from "../Interface/Comment.interface.js";
 class CommentRepository extends CommentInterface {
 
     getAllComment = async (filmId) => {
-        
+
         return CommentModel.Comment.find({ "film._id": filmId })
     };
 
@@ -36,7 +36,7 @@ class CommentRepository extends CommentInterface {
                             user: {
                                 nom: user.nom,
                                 email: user.email,
-                                image:user.image
+                                image: user.image
                             }
 
                         });
@@ -46,9 +46,9 @@ class CommentRepository extends CommentInterface {
 
     };
 
-    getAllFilmWithSomeGenre=async(genre)=>{
-        
-        return FilmModel.Film.find({"genre":genre})
+    getAllFilmWithSomeGenre = async (genre) => {
+
+        return FilmModel.Film.find({ "genre": genre })
     }
 }
 
