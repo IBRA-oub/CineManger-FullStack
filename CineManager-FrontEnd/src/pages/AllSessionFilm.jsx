@@ -7,20 +7,6 @@ import { useParams } from 'react-router-dom';
 export default function AllSessionFilm() {
   const { id } = useParams();
 
-  // const [sessions, setSessions] = useState([]);
-
-  
-  // const fetchSessions = async () => {
-  //   const data = await getAllSessionByFilm(id);
-
-  //   setSessions(data);
-    
-  // };
-  // useEffect(() => {
-
-  //   fetchSessions();
-
-  // }, [id]);
 
 
   return (

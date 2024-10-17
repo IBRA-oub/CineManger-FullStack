@@ -9,6 +9,7 @@ router.post('/login', UserController.loginUser)
 router.post('/requestResetPassword', UserController.requestPasswordReset)
 router.post('/resetPassword/:token', UserController.resetPassword)
 router.get('/current', validateToken, UserController.currentUser)
+router.put('/updateUser', validateToken, UserController.updateUser)
 
 export default router;
 

@@ -1,8 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Client/navbar'
 import Account from '../components/Client/Account'
+import { getUserInfo } from '../../services/userApi/userInfo'
 
 export default function UserInfo() {
+    const [user,setUser]= useState([])
+
+    useEffect(()=>{
+
+        const fetchUser = async()=>{
+            const data = await getUserInfo();
+            setUser(data)
+        }
+        fetchUser();
+    },[])
+
+    const handleUserUpdate = (updatedUser) => {
+      setUser(updatedUser);
+  };
   return (
     <>
          <div className='md:flex'>
@@ -10,7 +25,7 @@ export default function UserInfo() {
           <Navbar />
         </div>
         <div className='md:w-[85%] md:h-full'>
-          <Account/>
+          <Account user={user} handleUserUpdate={handleUserUpdate}/>
         </div>
       </div>
     

@@ -18,6 +18,9 @@ class UserModel {
         type: String,
         required: [true, "Please add the contact email address"],
       },
+      image: {
+        type: String
+    },
       role: {
         type: String,
         enum: ['admin', 'client'], 

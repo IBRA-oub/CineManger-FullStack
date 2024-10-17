@@ -2,9 +2,9 @@ import UserInterface from '../Interface/User.interface.js';
 import UserModel from "../../models/User.mjs";
 import bcrypt from "bcrypt";
 import crypto from 'crypto';
-import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
 import sendMail from "../../email.js";
+import minio from '../../minio.js';
 
 class UserRepository extends UserInterface {
 
@@ -53,7 +53,40 @@ class UserRepository extends UserInterface {
             });
     };
 
+    currentUser = async(userId)=>{
+        return UserModel.User.findById(userId)
+    }
 
+    updateUser = async (userId, userData, file) => {
+        console.log(file);
+        
+        if (file && file.image) {
+            
+            const imagePath = await this.uploadUserImage(file.image[0], 'images');
+            userData.image = imagePath;  
+        }
+        if (userData.password) {
+           
+            const salt = await bcrypt.genSalt(10);  
+            userData.password = await bcrypt.hash(userData.password, salt);
+        }
+
+        return UserModel.User.findById(userId)
+            .then((user) => {
+                if (!user) {
+                    throw new Error('User not found');
+                }
+
+                return UserModel.User.findByIdAndUpdate(
+                    userId,
+                    userData,
+                    { new: true }  
+                );
+            })
+            .catch(err => {
+                throw err;
+            });
+    };
     requestPasswordReset = async (email) => {
         return UserModel.User.findOne({ email })
             .then((user) => {
@@ -106,6 +139,20 @@ class UserRepository extends UserInterface {
                 throw err;
             });
     };
+
+    async uploadUserImage(file, folder) {
+        const bucketName = 'cinemanager';
+        const fileName = `${folder}/${file.originalname}`;
+
+        const exists = await minio.bucketExists(bucketName);
+        if (!exists) {
+            await minio.makeBucket(bucketName, 'us-east-1');
+        }
+
+
+        await minio.fPutObject(bucketName, fileName, file.path);
+        return `http://127.0.0.1:9000/${bucketName}/${fileName}`;
+    }
 
 
 }

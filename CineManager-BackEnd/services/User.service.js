@@ -9,6 +9,12 @@ class UserService {
     async loginUser(email, password){
         return this.UserRepository.loginUser(email, password)
     }
+    async currentUser(userId){
+        return this.UserRepository.currentUser(userId)
+    }
+    async updateUser(userId, userData, file){
+        return this.UserRepository.updateUser(userId, userData, file)
+    }
 
     async requestPasswordReset(email){
         return this.UserRepository.requestPasswordReset(email)
