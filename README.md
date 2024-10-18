@@ -65,6 +65,8 @@ Créez un fichier .env à la racine du projet et ajoutez vos variables d'environ
 
 2. use cases
 
+3.sequence
+
 
 ## 🔌 Endpoints API documentation 
 
