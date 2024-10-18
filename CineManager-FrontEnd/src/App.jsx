@@ -20,6 +20,7 @@ import CostumerInfo from './pages/CostumerInfo';
 import FilmGestion from './pages/FilmGestion';
 import SalleGestion from './pages/SalleGestion';
 import ShowTimeGestion from './pages/ShowTimeGestion';
+import Forbidden from './pages/Forbidden';
 
 function App() {
   return (
@@ -109,6 +110,7 @@ function App() {
             />
 
             <Route path='*' element={<PageNotFound />}></Route>
+            <Route path='/forbiden' element={<Forbidden />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

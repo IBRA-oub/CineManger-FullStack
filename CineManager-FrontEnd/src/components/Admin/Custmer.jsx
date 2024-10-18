@@ -18,9 +18,6 @@ export default function Custmer({ allUsers }) {
         );
     };
 
-
-
-
     return (
         <>
             <div className='pt-10 '>

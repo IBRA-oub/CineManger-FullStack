@@ -25,34 +25,29 @@ export default function Login() {
             password: passwordField.current.value
 
         }
-
         if (validateForm(fields)) {
             try {
                 await loginUserApi(fields);
                 const token = localStorage.getItem('token');
                 const decodedToken = jwtDecode(token);
-                console.log(decodedToken);
                 const userRole = decodedToken.user.role;
-                console.log('',decodedToken.user);
+                const userBanned = decodedToken.user.banned;
                 
-                
-                 if (userRole) {
-                    if (userRole === 'admin') {
-                      navigate('/dashboard-admin'); 
-                    } else if (userRole === 'client') {
-                      navigate('/client-reservation'); 
-                    }
-                  }
+              if(!userBanned){
 
-
+                  if (userRole) {
+                     if (userRole === 'admin') {
+                       navigate('/dashboard-admin'); 
+                     } else if (userRole === 'client') {
+                       navigate('/client-reservation'); 
+                     }
+                   }
+              }else{
+                navigate('/forbiden'); 
+              }
             } catch (error) {
                 console.log(error)
             }
-
-
-
-
-
             resetForm({ emailField, passwordField });
         }
     }

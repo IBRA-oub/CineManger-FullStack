@@ -41,7 +41,8 @@ class UserRepository extends UserInterface {
                             nom: user.nom,
                             email: user.email,
                             role: user.role,
-                            id: user.id
+                            id: user.id,
+                            banned:user.banned
                         },
                     }, process.env.ACCESSS_TOKEN_SECRET, { expiresIn: '3h' });
                     return { accessToken };
