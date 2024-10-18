@@ -18,6 +18,7 @@ import UserInfo from './pages/UserInfo';
 import DashboardAdmin from './pages/DashboardAdmin';
 import CostumerInfo from './pages/CostumerInfo';
 import FilmGestion from './pages/FilmGestion';
+import SalleGestion from './pages/SalleGestion';
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
             <Route path='/dashboard-admin'  element={<DashboardAdmin/>}></Route>
             <Route path='/Customer'  element={<CostumerInfo/>}></Route>
             <Route path='/Films'  element={<FilmGestion/>}></Route>
+            <Route path='/Salles'  element={<SalleGestion/>}></Route>
             <Route path='*' element={<PageNotFound />}></Route>
           </Route>
         </Routes>
