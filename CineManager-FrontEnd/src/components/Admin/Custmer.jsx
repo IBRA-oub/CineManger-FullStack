@@ -1,6 +1,8 @@
 import React from 'react'
 
-export default function Custmer() {
+export default function Custmer({allUsers}) {
+   
+    
     return (
         <>
             <div className='pt-10 '>
@@ -11,7 +13,7 @@ export default function Custmer() {
                             <thead className='bg-[#e5e5e5] '>
                                 <tr>
                                     <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 ">
-                                        <p className="block antialiased font-sans text-sm text-black  leading-none font-semibold">Transaction</p>
+                                        <p className="block antialiased font-sans text-sm text-black  leading-none font-semibold">image</p>
                                     </th>
                                     <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
                                         <p className="block antialiased font-sans text-sm text-black  leading-none font-semibold">Name</p>
@@ -29,23 +31,25 @@ export default function Custmer() {
                                 </tr>
                             </thead>
                             <tbody className=''>
-                                <tr>
+                                {allUsers.map(user=>(
+
+                                <tr key={user._id}>
                                     <td className="p-4 border-b border-blue-gray-50">
                                         <div className="flex items-center gap-3">
-                                            <img src="https://docs.material-tailwind.com/img/logos/logo-spotify.svg" alt="Spotify" className="inline-block relative object-center w-12 h-12 rounded-lg border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1" />
+                                            <img src={user.image || "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg"} alt="Spotify" className="inline-block relative object-center w-12 h-12 rounded-lg border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1" />
                                             <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-bold"></p>
                                         </div>
                                     </td>
                                     <td className="p-4 border-b border-blue-gray-50">
-                                        <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">$2,500</p>
+                                        <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">{user.nom}</p>
                                     </td>
                                     <td className="p-4 border-b border-blue-gray-50">
-                                        <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">Wed 3:00pm</p>
+                                        <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">{user.email}</p>
                                     </td>
                                     <td className="p-4 border-b border-blue-gray-50">
                                         <div className="w-max">
                                             <div className="relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-green-500/20 text-green-900 py-1 px-2 text-xs rounded-md" >
-                                                <span className="">paid</span>
+                                                <span className="">{user.role}</span>
                                             </div>
                                         </div>
                                     </td>
@@ -61,6 +65,7 @@ export default function Custmer() {
                                         </button>
                                     </td>
                                 </tr>
+                                ))}
 
                             </tbody>
                         </table>

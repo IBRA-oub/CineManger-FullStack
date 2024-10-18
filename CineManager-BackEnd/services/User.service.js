@@ -15,6 +15,9 @@ class UserService {
     async getSumUser(){
         return this.UserRepository.getSumUser()
     }
+    async getAllUser(){
+        return this.UserRepository.getAllUser()
+    }
     async updateUser(userId, userData, file){
         return this.UserRepository.updateUser(userId, userData, file)
     }

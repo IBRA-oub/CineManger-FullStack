@@ -33,6 +33,7 @@ app.use('/api/salle', salleRouter);
 app.use('/api/rating', ratingRouter);
 app.use('/api/comment', commentRouter);
 app.use('/api/seance', seanceRouter);
+app.use('/api/getAllUser', seanceRouter);
 app.use('/api/reservation', reservationRouter);
 app.use('/api/admin', adminRouter);
 const PORT = process.env.PORT;

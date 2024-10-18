@@ -53,6 +53,16 @@ class UserRepository extends UserInterface {
             });
     };
 
+    getAllUser = async () => {
+        return UserModel.User.find()
+            .then(users => {
+                return users;
+            })
+            .catch(err => {
+                throw err;
+            });
+    };
+
         currentUser = async(userId)=>{
             return UserModel.User.findById(userId)
         }

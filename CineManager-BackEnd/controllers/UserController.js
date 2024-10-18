@@ -28,6 +28,19 @@ class UserController {
             });
     };
 
+    getAllUser = async (req, res) => {
+       
+        return this.UserService.getAllUser()
+            .then(users => {
+
+                return res.status(200).json(users);
+            })
+            .catch((err) => {
+                return res.status(500).json({ message: err.message });
+            })
+
+    };
+
     getSumUser = (req, res) => {
         
         this.UserService.getSumUser()

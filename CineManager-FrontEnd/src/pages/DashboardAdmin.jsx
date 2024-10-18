@@ -6,6 +6,7 @@ import { getCountUser } from '../../services/userApi/getCountUser'
 import { getCountFilmApi } from '../../services/filmApi/getCountFilmApi'
 import { getCountReservationApi } from '../../services/reservation/getCountReservationApi'
 import { getCountSeanceApi } from '../../services/sessionApi/getCountSessionApi'
+import { getAllUsers } from '../../services/userApi/getAllUsers'
 
 export default function DashboardAdmin() {
   const [user,setUser]= useState([])
@@ -13,6 +14,7 @@ export default function DashboardAdmin() {
   const [countFilm,setCountFilm]= useState([])
   const [countReservation,setCountReservation]= useState([])
   const [countSeance,setCountSeance]= useState([])
+
 
   useEffect(()=>{
 
@@ -36,6 +38,7 @@ export default function DashboardAdmin() {
           const data = await getCountSeanceApi();
           setCountSeance(data)
       }
+     
       fetchUser();
       fetchCountUser();
       fetchCountFilm();
@@ -46,6 +49,8 @@ export default function DashboardAdmin() {
   const handleUserUpdate = (updatedUser) => {
     setUser(updatedUser);
 };
+
+
   return (
     <>
     <div className='md:flex'>
@@ -53,7 +58,7 @@ export default function DashboardAdmin() {
             <NavBar />
         </div>
         <div className='md:w-[85%] md:h-full'>
-          <Dashboard user={user} handleUserUpdate={handleUserUpdate} countUser={countUser} countFilm={countFilm} countReservation={countReservation} countSeance={countSeance}/>
+          <Dashboard user={user}  handleUserUpdate={handleUserUpdate} countUser={countUser} countFilm={countFilm} countReservation={countReservation} countSeance={countSeance}/>
         </div>
     </div>
 
