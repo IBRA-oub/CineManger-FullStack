@@ -17,6 +17,9 @@ class SeanceInterface{
     async getSeance(id){
         throw new Error('Must be Implemented!!');
     }
+    async getSumSeance(){
+        throw new Error('Must be Implemented!!');
+    }
     async updateSeance(id, updateData){
         throw new Error('Must be Implemented!!');
     }

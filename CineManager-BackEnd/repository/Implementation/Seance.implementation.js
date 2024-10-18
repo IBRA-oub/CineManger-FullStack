@@ -58,6 +58,15 @@ class SeanceRepository extends SeanceInterface {
                 return seance
             });
     };
+    getSumSeance = async () => {
+        try {
+            const seanceCount = await SeanceModel.Seance.countDocuments();
+            return seanceCount;
+        } catch (error) {
+            console.error('Error fetching sance count:', error);
+            throw error;
+        }
+    };
 
     updateSeance = async(id, updateData) => {
         return SeanceModel.Seance.findById(id)

@@ -37,7 +37,7 @@ function App() {
             <Route 
               path='/client-reservation'  
               element={
-                <PrivateRoute>
+                <PrivateRoute role='client'>
                   <ClientReservation />
                 </PrivateRoute>
               } 
@@ -45,7 +45,7 @@ function App() {
             <Route 
               path='/client-tickets'  
               element={
-                <PrivateRoute>
+                <PrivateRoute role='client'>
                   <ClientTickets />
                 </PrivateRoute>
               } 
@@ -53,7 +53,7 @@ function App() {
             <Route 
               path='/my-account'  
               element={
-                <PrivateRoute>
+                <PrivateRoute role='client'>
                   <UserInfo/>
                 </PrivateRoute>
               } 
@@ -61,17 +61,53 @@ function App() {
             <Route 
               path='/film-stream/:id'  
               element={
-                <PrivateRoute>
+                <PrivateRoute role='client'>
                   <FilmStream />
                 </PrivateRoute>
               } 
             />
             <Route path='/reservation/:id'  element={<Reservation />}></Route>
-            <Route path='/dashboard-admin'  element={<DashboardAdmin/>}></Route>
-            <Route path='/Customer'  element={<CostumerInfo/>}></Route>
-            <Route path='/Films'  element={<FilmGestion/>}></Route>
-            <Route path='/Salles'  element={<SalleGestion/>}></Route>
-            <Route path='/Show-time'  element={<ShowTimeGestion/>}></Route>
+            <Route 
+              path='/dashboard-admin'  
+              element={
+                <PrivateRoute role='admin'>
+                  <DashboardAdmin/>
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path='/Customer'  
+              element={
+                <PrivateRoute role='admin'>
+                  <CostumerInfo/>
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path='/Films'  
+              element={
+                <PrivateRoute role='admin'>
+                  <FilmGestion/>
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path='/Salles'  
+              element={
+                <PrivateRoute role='admin'>
+                  <SalleGestion/>
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path='/Show-time'  
+              element={
+                <PrivateRoute role='admin'>
+                  <ShowTimeGestion/>
+                </PrivateRoute>
+              } 
+            />
+
             <Route path='*' element={<PageNotFound />}></Route>
           </Route>
         </Routes>

@@ -17,6 +17,9 @@ class FilmInterface{
     async getFilm(id){
         throw new Error('Must be Implemented!!');
     }
+    async getSumFilm(){
+        throw new Error('Must be Implemented!!');
+    }
     async updateFilm(id, filmData,file){
         throw new Error('Must be Implemented!!');
     }

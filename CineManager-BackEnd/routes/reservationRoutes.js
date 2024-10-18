@@ -8,6 +8,7 @@ const router = express.Router();
 router.get('/allReservation',validateToken, checkRole("client"),  ReservationController.getAllReservation);
 router.post('/createReservation',validateToken, checkRole("client"), ReservationController.createReservation);
 router.get('/getReservation/:id',validateToken, checkRole("client"), ReservationController.getReservation);
+router.get('/getReservation', ReservationController.getSumReservation);
 router.delete('/deleteReservation/:id',validateToken, checkRole("client"), ReservationController.deleteReservation);
 
 export default router;

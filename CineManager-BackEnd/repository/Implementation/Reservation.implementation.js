@@ -103,6 +103,15 @@ class ReservationRepository extends ReservationInterface {
                 throw error;
             });
     }
+    getSumReservation = async () => {
+        try {
+            const reservationCount = await ReservationModel.Reservation.countDocuments();
+            return reservationCount;
+        } catch (error) {
+            console.error('Error fetching reservation count:', error);
+            throw error;
+        }
+    };
 
     deleteReservation = async (reservationId) => {
         return ReservationModel.Reservation.findById(reservationId)

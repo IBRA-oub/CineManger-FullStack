@@ -13,6 +13,9 @@ class SeanceService {
     async getSeance(id) {
         return this.SeanceRepository.getSeance(id)
     }
+    async getSumSeance() {
+        return this.SeanceRepository.getSumSeance()
+    }
     async updateSeance(id, updateData) {
         return this.SeanceRepository.updateSeance(id, updateData)
     }

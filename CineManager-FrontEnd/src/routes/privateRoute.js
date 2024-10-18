@@ -1,18 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode';
 
-function PrivateRoute({ children }) {
+function PrivateRoute({ children, role }) {
   const navigate = useNavigate();
-  const isAuthenticated = localStorage.getItem('token');
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate('/login');
-    }
-  }, [isAuthenticated]);
+    const token = localStorage.getItem('token');
 
-  
-  return isAuthenticated ? children : null;
+    if (!token) {
+      navigate('/login');
+    } else {
+      try {
+        const decodedToken = jwtDecode(token);
+        const userRole = decodedToken?.user?.role;
+
+        if (userRole === role) {
+          setIsAuthorized(true); 
+        } else {
+          if (userRole === 'admin') {
+            navigate('/PageNotFound');
+          } else if (userRole === 'client') {
+            navigate('/PageNotFound');
+          }
+        }
+      } catch (error) {
+        console.error('Erreur lors de la décodage du token', error);
+        navigate('/login'); 
+      }
+    }
+  }, [navigate, role]);
+
+  return isAuthorized ? children : null; 
 }
 
 export default PrivateRoute;

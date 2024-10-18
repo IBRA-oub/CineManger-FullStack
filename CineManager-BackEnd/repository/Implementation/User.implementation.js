@@ -53,9 +53,9 @@ class UserRepository extends UserInterface {
             });
     };
 
-    currentUser = async(userId)=>{
-        return UserModel.User.findById(userId)
-    }
+        currentUser = async(userId)=>{
+            return UserModel.User.findById(userId)
+        }
 
     updateUser = async (userId, userData, file) => {
         
@@ -138,6 +138,17 @@ class UserRepository extends UserInterface {
                 throw err;
             });
     };
+
+    getSumUser = async () => {
+        try {
+            const userCount = await UserModel.User.countDocuments();
+            return userCount;
+        } catch (error) {
+            console.error('Error fetching user count:', error);
+            throw error;
+        }
+    };
+    
 
     async uploadUserImage(file, folder) {
         const bucketName = 'cinemanager';

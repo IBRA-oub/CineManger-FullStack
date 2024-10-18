@@ -13,6 +13,9 @@ class ReservationService  {
     async getReservation(userId, reservationId) {
         return this.ReservationRepository.getReservation(userId, reservationId)
     }
+    async getSumReservation() {
+        return this.ReservationRepository.getSumReservation()
+    }
     
     async deleteReservation(reservationId) {
         return this.ReservationRepository.deleteReservation(reservationId)

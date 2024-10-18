@@ -28,6 +28,16 @@ class UserController {
             });
     };
 
+    getSumUser = (req, res) => {
+        
+        this.UserService.getSumUser()
+            .then((getSumUser) => {
+                res.status(200).json(getSumUser);
+            })
+            .catch((error) => {
+                res.status(500).json({ message: error.message });
+            });
+    };
     currentUser = (req, res) => {
         const token = req.headers['authorization']?.split(' ')[1];
         if (!token) {

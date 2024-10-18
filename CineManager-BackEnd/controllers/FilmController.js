@@ -64,6 +64,16 @@ class FilmController {
 
     };
 
+    getSumFilm = (req, res) => {
+        this.FilmService.getSumFilm()
+            .then((getSumFilm) => {
+                res.status(200).json(getSumFilm);
+            })
+            .catch((error) => {
+                res.status(500).json({ message: error.message });
+            });
+    };
+
     updateFilm = async (req, res) => {
         upload(req, res, async (err) => {
             const id = req.params.id;

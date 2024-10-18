@@ -26,6 +26,16 @@ class SeanceController {
             .catch(err => res.status(500).json({ message: err.message }));
     };
 
+    getSumSeance = (req, res) => {
+        this.SeanceService.getSumSeance()
+            .then((getSumSeance) => {
+                res.status(200).json(getSumSeance);
+            })
+            .catch((error) => {
+                res.status(500).json({ message: error.message });
+            });
+    };
+
     updateSeance = async (req, res) => {
         const { id } = req.params;
         const updateData = req.body;

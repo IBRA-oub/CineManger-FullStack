@@ -18,6 +18,9 @@ class ReservationInterface{
     async getReservation(userId, reservationId){
         throw new Error('Must be Implemented!!');
     }
+    async getSumReservation(){
+        throw new Error('Must be Implemented!!');
+    }
     async deleteReservation(rreservationId){
         throw new Error('Must be Implemented!!');
     }

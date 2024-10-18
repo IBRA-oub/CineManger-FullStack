@@ -16,6 +16,9 @@ class UserInterface{
     async currentUser(userId){
         throw new Error('Must be Implemented!!');
     }
+    async getSumUser(){
+        throw new Error('Must be Implemented!!');
+    }
     async updateUser(userId, userData, file){
         throw new Error('Must be Implemented!!');
     }

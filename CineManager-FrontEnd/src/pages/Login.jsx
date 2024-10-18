@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
 import seatBg from '../assets/images/seatBg.jpg';
 import logo from '../assets/images/logo.png';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLoginValidation } from '../../hooks/validation/userLoginValidation';
 import { loginUserApi } from '../../services/authApi/LoginUserApi';
+import {jwtDecode} from 'jwt-decode';
 
 
 export default function Login() {
@@ -15,8 +16,8 @@ export default function Login() {
     const navigate = useNavigate();
 
 
-    const handleSubmit = async(e) => {
-      
+    const handleSubmit = async (e) => {
+
         e.preventDefault()
 
         const fields = {
@@ -26,13 +27,26 @@ export default function Login() {
         }
 
         if (validateForm(fields)) {
-            try{
+            try {
                 await loginUserApi(fields);
-                navigate('/my-account')
+                const token = localStorage.getItem('token');
+                const decodedToken = jwtDecode(token);
+                console.log(decodedToken);
+                const userRole = decodedToken.user.role;
+                console.log('',decodedToken.user);
                 
+                
+                 if (userRole) {
+                    if (userRole === 'admin') {
+                      navigate('/dashboard-admin'); 
+                    } else if (userRole === 'client') {
+                      navigate('/client-reservation'); 
+                    }
+                  }
 
-            }catch(error){
-               console.log(error)
+
+            } catch (error) {
+                console.log(error)
             }
 
 
@@ -88,10 +102,10 @@ export default function Login() {
                                     Register
                                 </button>
                             </Link>
-                           
-                           
+
+
                         </div>
-                        
+
 
 
                     </div>

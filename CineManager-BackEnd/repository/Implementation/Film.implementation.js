@@ -74,6 +74,16 @@ class FilmRepository extends FilmInterface {
 
     };
 
+    getSumFilm = async () => {
+        try {
+            const filmCount = await FilmModel.Film.countDocuments();
+            return filmCount;
+        } catch (error) {
+            console.error('Error fetching film count:', error);
+            throw error;
+        }
+    };
+
 
 
     deleteFilm = async (id) => {

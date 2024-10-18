@@ -13,6 +13,9 @@ class FilmService {
     async getFilm( id) {
         return this.FilmRepository.getFilm( id)
     }
+    async getSumFilm() {
+        return this.FilmRepository.getSumFilm()
+    }
     async updateFilm(id, filmData,file) {
         return this.FilmRepository.updateFilm(id, filmData,file)
     }

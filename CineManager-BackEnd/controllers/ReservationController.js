@@ -8,7 +8,7 @@ class ReservationController {
     createReservation = (req, res) => {
         const { seanceId, places_reservees } = req.body;
 
-        // Extraire le token d'authentification et décoder l'userId
+  
         const token = req.headers['authorization']?.split(' ')[1];
         if (!token) {
             return res.status(401).json({ message: 'Token not provided' });
@@ -17,7 +17,7 @@ class ReservationController {
         const decoded = jwt.verify(token, process.env.ACCESSS_TOKEN_SECRET);
         const userId = decoded.user.id;
 
-        // Appel du service pour créer la réservation
+     
         this.ReservationService.createReservation(userId, seanceId, places_reservees)
             .then((result) => {
                 res.status(201).json(result);
@@ -27,7 +27,7 @@ class ReservationController {
             });
     };
 
-    // Obtenir toutes les réservations d'un utilisateur
+
     getAllReservation = (req, res) => {
         const token = req.headers['authorization']?.split(' ')[1];
         if (!token) {
@@ -46,7 +46,7 @@ class ReservationController {
             });
     };
 
-    // Obtenir une réservation spécifique
+ 
     getReservation = (req, res) => {
         const token = req.headers['authorization']?.split(' ')[1];
         if (!token) {
@@ -67,7 +67,17 @@ class ReservationController {
             });
     };
 
-    // Supprimer une réservation
+    getSumReservation = (req, res) => {
+        this.ReservationService.getSumReservation()
+            .then((getSumReservation) => {
+                res.status(200).json(getSumReservation);
+            })
+            .catch((error) => {
+                res.status(500).json({ message: error.message });
+            });
+    };
+
+
     deleteReservation = (req, res) => {
         const reservationId = req.params.id;
 
