@@ -36,7 +36,7 @@ CinéManager est une application Full Stack permettant de gérer les réservatio
 
 1. Clonez le dépôt:
    ```bash
-   git clone https://github.com/IBRA-oub/cineMnger-frontEnd.git
+   git clone https://github.com/IBRA-oub/CineManger-FullStack.git
    cd nom-du-repo
 2. Installez les dépendances:
    ````bash
