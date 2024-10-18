@@ -11,7 +11,7 @@ class UserModel {
       email: {
         type: String,
         required: [true, "Please add the contact email address"],
-        unique: [true,"email address already taken"],
+        unique: [true, "email address already taken"],
         trim: true
       },
       password: {
@@ -20,11 +20,15 @@ class UserModel {
       },
       image: {
         type: String
-    },
+      },
       role: {
         type: String,
-        enum: ['admin', 'client'], 
-        default: 'client' 
+        enum: ['admin', 'client'],
+        default: 'client'
+      },
+      banned: {
+        type: Boolean,
+        default: false
       },
       createdAt: {
         type: Date,

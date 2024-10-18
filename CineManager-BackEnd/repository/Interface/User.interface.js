@@ -25,6 +25,9 @@ class UserInterface{
     async updateUser(userId, userData, file){
         throw new Error('Must be Implemented!!');
     }
+    async toggleBanStatus(userId){
+        throw new Error('Must be Implemented!!');
+    }
     async requestPasswordReset(email){
         throw new Error('Must be Implemented!!');
     }

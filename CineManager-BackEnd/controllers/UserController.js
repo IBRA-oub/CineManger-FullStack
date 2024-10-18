@@ -29,7 +29,7 @@ class UserController {
     };
 
     getAllUser = async (req, res) => {
-       
+
         return this.UserService.getAllUser()
             .then(users => {
 
@@ -42,7 +42,7 @@ class UserController {
     };
 
     getSumUser = (req, res) => {
-        
+
         this.UserService.getSumUser()
             .then((getSumUser) => {
                 res.status(200).json(getSumUser);
@@ -93,6 +93,22 @@ class UserController {
                 });
 
         })
+    }
+
+    toggleBanStatus = (req, res) => {
+        const userId = req.params.id;
+        
+        try {
+
+            this.UserService.toggleBanStatus(userId)
+                .then((user) => {
+
+                    res.status(200).json(user);
+                })
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+
     }
 
     requestPasswordReset = (req, res) => {

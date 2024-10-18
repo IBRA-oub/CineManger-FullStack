@@ -4,12 +4,12 @@ const API_URL = 'http://localhost:3000/api/user/updateUser';
 const token = localStorage.getItem('token');
 
 export const updateUserInfo = async (formData) => {
-    
+
     try {
 
-        const response = await axios.put(API_URL,formData,{
+        const response = await axios.put(API_URL, formData, {
             headers: {
-                'Authorization': `Bearer ${token}`, 
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'multipart/form-data',
             }
         });

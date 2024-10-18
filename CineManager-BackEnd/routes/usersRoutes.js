@@ -12,6 +12,7 @@ router.post('/resetPassword/:token', UserController.resetPassword)
 router.get('/current', validateToken, UserController.currentUser)
 router.get('/getSumUser', UserController.getSumUser)
 router.get('/getAllUser', UserController.getAllUser)
+router.put('/banned/:id', UserController.toggleBanStatus)
 router.put('/updateUser', validateToken, UserController.updateUser)
 
 export default router;

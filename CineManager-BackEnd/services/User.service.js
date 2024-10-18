@@ -21,6 +21,9 @@ class UserService {
     async updateUser(userId, userData, file){
         return this.UserRepository.updateUser(userId, userData, file)
     }
+    async toggleBanStatus(userId){
+        return this.UserRepository.toggleBanStatus(userId)
+    }
 
     async requestPasswordReset(email){
         return this.UserRepository.requestPasswordReset(email)

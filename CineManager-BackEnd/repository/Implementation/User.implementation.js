@@ -5,6 +5,7 @@ import crypto from 'crypto';
 import jwt from "jsonwebtoken";
 import sendMail from "../../email.js";
 import minio from '../../minio.js';
+import { log } from 'console';
 
 class UserRepository extends UserInterface {
 
@@ -96,6 +97,28 @@ class UserRepository extends UserInterface {
                 throw err;
             });
     };
+
+    toggleBanStatus = async (userId) => {
+        
+        return UserModel.User.findById(userId)
+            .then((user) => {
+                if (!user) {
+                    throw new Error("User not found");
+                }
+
+                // Inverser le statut `banned`
+                user.banned = !user.banned;
+
+                return user.save();
+            })
+            .then(updatedUser => {
+                return { message: "User ban status updated successfully", banned: updatedUser.banned };
+            })
+            .catch(err => {
+                throw err;
+            });
+    };
+
     requestPasswordReset = async (email) => {
         return UserModel.User.findOne({ email })
             .then((user) => {
